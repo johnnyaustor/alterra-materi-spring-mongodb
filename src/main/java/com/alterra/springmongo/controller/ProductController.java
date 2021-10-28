@@ -1,6 +1,7 @@
 package com.alterra.springmongo.controller;
 
 import com.alterra.springmongo.model.Product;
+import com.alterra.springmongo.payload.InternalError;
 import com.alterra.springmongo.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,19 +30,35 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> product(@PathVariable("id") String id) {
-        Product product = productService.findById(id);
-        return ResponseEntity.ok(product);
+        try {
+            Product product = productService.findById(id);
+            return ResponseEntity.ok(product);
+        } catch (Exception e) {
+            InternalError internalError = new InternalError();
+            internalError.setMessage(e.getMessage());
+            return ResponseEntity.internalServerError().body(internalError);
+        }
     }
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable("id") String id, @RequestBody Product product) {
-        Product productUpdated = productService.update(id, product);
-        return ResponseEntity.ok(productUpdated);
+        try {
+            Product productUpdated = productService.update(id, product);
+            return ResponseEntity.ok(productUpdated);
+        } catch (Exception e) {
+            InternalError internalError = new InternalError(e.getMessage());
+            return ResponseEntity.internalServerError().body(internalError);
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") String id) {
-        productService.delete(id);
-        return ResponseEntity.noContent().build();
+        try {
+            productService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            InternalError internalError = new InternalError(e.getMessage());
+            return ResponseEntity.internalServerError().body(internalError);
+        }
     }
 }

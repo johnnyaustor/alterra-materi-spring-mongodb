@@ -5,7 +5,6 @@ import com.alterra.springmongo.model.Product;
 import java.util.List;
 
 public interface ProductService {
-    String hello();
     Product create(Product product);
     List<Product> findAll();
     Product findById(String id);

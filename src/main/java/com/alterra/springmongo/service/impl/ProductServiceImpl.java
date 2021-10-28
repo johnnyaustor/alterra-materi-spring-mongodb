@@ -4,22 +4,15 @@ import com.alterra.springmongo.model.Product;
 import com.alterra.springmongo.repository.ProductRepository;
 import com.alterra.springmongo.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Profile("default")
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
-
-    @Override
-    public String hello() {
-        return "hello mongo";
-    }
 
     @Override
     public Product create(Product product) {

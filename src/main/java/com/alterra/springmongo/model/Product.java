@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Data
 @Document("products")
 public class Product {
@@ -12,4 +14,5 @@ public class Product {
     private String name;
     private Integer qty;
     private Float price;
+    private List<String> tags;
 }

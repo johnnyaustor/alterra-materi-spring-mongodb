@@ -3,7 +3,6 @@ package com.alterra.springmongo;
 import com.alterra.springmongo.model.Product;
 import com.alterra.springmongo.service.ProductService;
 import lombok.extern.log4j.Log4j2;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,11 +15,6 @@ public class ProductServiceTest {
 
     @Autowired
     private ProductService productService;
-
-    @Test
-    public void testInjection() {
-        Assertions.assertEquals("hello postgres", productService.hello());
-    }
 
     @Test
     public void testCreate() {
